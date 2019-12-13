@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!--
+            <h1>{{article.title}}</h1>
+        <h2>{{article.author}}</h2>
+        <h3>{{article.publishDate}}</h3>
+        <p>           
+            {{article.content}}
+        </p>
+        -->
+        <!--heart是组件的一个属性，那么组件必须通过props声明这个属性-->
+        <!--<solo v-bind:heart="article"></solo>
+        <solo v-bind:heart="article2"></solo>-->
+        <solo v-for="article in articleList" :key="article.title" :heart="article"></solo>
+    </div>
+    <script>
+        //定义自定义组件
+        //第一个参数是自定义组件的标签名称，第二个参数是定义该组件的运行规则对象
+        Vue.component('solo',{
+            props:['heart'],
+            //template中定义的是组件的模板，也就是html和{{}}以及vue指令的组合
+            //template必须要有根标签
+            template:   '<div>'+
+                        '<h1 style="color:red">{{heart.title}}</h1>'+
+                        '<h2>{{heart.author}}</h2>'+
+                        '<h3>{{heart.publishDate}}</h3>'+
+                        '<p>{{heart.content}}</p>'+
+                        '</div>'
+        });
+        var app= new Vue({
+            el:"#app",
+            data:{
+                articleList:[
+                {
+                    title:"111",
+                    author:"222",
+                    publishDate:"2019-12-13",
+                    content:"333"             
+               },
+               {
+                    title:"aaa",
+                    author:"bbb",
+                    publishDate:"2019-12-13",
+                    content:"ccc"             
+               },
+               {
+                    title:"xcv",
+                    author:"sd",
+                    publishDate:"2019-12-13",
+                    content:"zgsdfg"             
+               }
+                ]
+            }
+                
+                    
+        })
+    </script>
+    <style>
+        
+    </style>
+</body>
+</html>
